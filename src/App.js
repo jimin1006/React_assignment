@@ -1,40 +1,32 @@
-//Challenge 2 of 3
+//Challenge 3 of 3 
 
-import { getImageUrl } from './utils.js';
-
-function Avatar({ person, size }) {
-  let thumbnailSize = 's';
-  if (size > 90) {
-    thumbnailSize = 'b';
-  }
+function Card({ children }) {
   return (
-    <img
-      className="avatar"
-      src={getImageUrl(person, thumbnailSize)}
-      alt={person.name}
-      width={size}
-      height={size}
-    />
+    <div className="card">
+      <div className="card-content">
+        {children}
+      </div>
+    </div>
   );
 }
 
 export default function Profile() {
   return (
-    <>
-      <Avatar
-        size={40}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
-        }}
-      />
-      <Avatar
-        size={120}
-        person={{ 
-          name: 'Gregorio Y. Zara', 
-          imageId: '7vQD0fP'
-        }}
-      />
-    </>
+    <div>
+      <Card>
+        <h1>Photo</h1>
+        <img
+          className="avatar"
+          src="https://i.imgur.com/OKS67lhm.jpg"
+          alt="Aklilu Lemma"
+          width={100}
+          height={100}
+        />
+      </Card>
+      <Card>
+        <h1>About</h1>
+        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
+      </Card>
+    </div>
   );
 }
