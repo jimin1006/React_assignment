@@ -1,66 +1,40 @@
-//Challenge 1 of 3
+//Challenge 2 of 3
 
 import { getImageUrl } from './utils.js';
 
-function Profile({
-  imageId,
-  name,
-  profession,
-  awards,
-  discovery,
-  imageSize = 70
-}) {
+function Avatar({ person, size }) {
+  let thumbnailSize = 's';
+  if (size > 90) {
+    thumbnailSize = 'b';
+  }
   return (
-    <section className="profile">
-      <h2>{name}</h2>
-      <img
-        className="avatar"
-        src={getImageUrl(imageId)}
-        alt={name}
-        width={imageSize}
-        height={imageSize}
-      />
-      <ul>
-        <li><b>Profession:</b> {profession}</li>
-        <li>
-          <b>Awards: {awards.length} </b>
-          ({awards.join(', ')})
-        </li>
-        <li>
-          <b>Discovered: </b>
-          {discovery}
-        </li>
-      </ul>
-    </section>
+    <img
+      className="avatar"
+      src={getImageUrl(person, thumbnailSize)}
+      alt={person.name}
+      width={size}
+      height={size}
+    />
   );
 }
 
-export default function Gallery() {
+export default function Profile() {
   return (
-    <div>
-      <h1>Notable Scientists</h1>
-      <Profile
-        imageId="szV5sdG"
-        name="Maria Skłodowska-Curie"
-        profession="physicist and chemist"
-        discovery="polonium (chemical element)"
-        awards={[
-          'Nobel Prize in Physics',
-          'Nobel Prize in Chemistry',
-          'Davy Medal',
-          'Matteucci Medal'
-        ]}
+    <>
+      <Avatar
+        size={40}
+        person={{ 
+          name: 'Gregorio Y. Zara', 
+          imageId: '7vQD0fP'
+        }}
       />
-      <Profile
-        imageId='YfeOqp2'
-        name='Katsuko Saruhashi'
-        profession='geochemist'
-        discovery="a method for measuring carbon dioxide in seawater"
-        awards={[
-          'Miyake Prize for geochemistry',
-          'Tanaka Prize'
-        ]}
+      <Avatar
+        size={120}
+        person={{ 
+          name: 'Gregorio Y. Zara', 
+          imageId: '7vQD0fP'
+        }}
       />
-    </div>
+    </>
   );
 }

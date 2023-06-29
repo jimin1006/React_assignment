@@ -1,8 +1,11 @@
-export function getImageUrl(imageId, size = 's') {
+//Challenge 2 of 3
+
+export function getImageUrl(person, size) {
     return (
       'https://i.imgur.com/' +
-      imageId +
+      person.imageId +
       size +
       '.jpg'
     );
   }
+  
