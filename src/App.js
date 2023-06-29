@@ -1,12 +1,15 @@
-//default export를 사용한 경우
-import Gallery from './Gallery.js';
-import Profile from './Profile.js';
-
-export default function App() {
+//HTML을 JSX로 변환해보기
+export default function Bio() {
   return (
     <div>
-      <Profile />
-      <Gallery />
+      <div className="intro">
+        <h1>Welcome to my website!</h1>
+      </div>
+      <p className="summary">
+        You can find my thoughts here.
+        <br /><br />
+        <b>And <i>pictures</i></b> of scientists!
+      </p>
     </div>
   );
 }
