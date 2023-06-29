@@ -1,30 +1,33 @@
-//Challenge 3 of 4 
+//Challenge 4 of 4 
 
-import { recipes } from './data.js';
+const poem = {
+  lines: [
+    'I write, erase, rewrite',
+    'Erase again, and then',
+    'A poppy blooms.'
+  ]
+};
 
-function Recipe({ id, name, ingredients }) {
+export default function Poem() {
+  let output = [];
+
+  //출력할 배열
+  poem.lines.forEach((line, i) => {
+    output.push(
+      <hr key={i + '-separator'} />
+    );
+    output.push(
+      <p key={i + '-text'}>
+        {line}
+      </p>
+    );
+  });
+  //<hr />을 삭제합니다.
+  output.shift();
+
   return (
-    <div>
-      <h2>{name}</h2>
-      <ul>
-        {ingredients.map(ingredient =>
-          <li key={ingredient}>
-            {ingredient}
-          </li>
-        )}
-      </ul>
-    </div>
+    <article>
+      {output}
+    </article>
   );
 }
-
-export default function RecipeList() {
-  return (
-    <div>
-      <h1>Recipes</h1>
-      {recipes.map(recipe =>
-        <Recipe {...recipe} key={recipe.id} />
-      )}
-    </div>
-  );
-}
-
