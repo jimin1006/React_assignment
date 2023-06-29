@@ -1,37 +1,51 @@
-//Challenge 3 of 3 
+//Challenge 1 of 4 
 
-function Drink({ name }) {
-  let part, caffeine, age;
-  if (name === 'tea') {
-    part = 'leaf';
-    caffeine = '15–70 mg/cup';
-    age = '4,000+ years';
-  } else if (name === 'coffee') {
-    part = 'bean';
-    caffeine = '80–185 mg/cup';
-    age = '1,000+ years';
-  }
-  return (
-    <section>
-      <h1>{name}</h1>
-      <dl>
-        <dt>Part of plant</dt>
-        <dd>{part}</dd>
-        <dt>Caffeine content</dt>
-        <dd>{caffeine}</dd>
-        <dt>Age</dt>
-        <dd>{age}</dd>
-      </dl>
-    </section>
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+
+export default function List() {
+  const chemists = people.filter(person =>
+    person.profession === 'chemist'
   );
-}
-
-export default function DrinkList() {
+  const everyoneElse = people.filter(person =>
+    person.profession !== 'chemist'
+  );
   return (
-    <div>
-      <Drink name="tea" />
-      <Drink name="coffee" />
-    </div>
+    <article>
+      <h1>Scientists</h1>
+      <h2>Chemists</h2>
+      <ul>
+        {chemists.map(person =>
+          <li key={person.id}>
+            <img
+              src={getImageUrl(person)}
+              alt={person.name}
+            />
+            <p>
+              <b>{person.name}:</b>
+              {' ' + person.profession + ' '}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        )}
+      </ul>
+      <h2>Everyone Else</h2>
+      <ul>
+        {everyoneElse.map(person =>
+          <li key={person.id}>
+            <img
+              src={getImageUrl(person)}
+              alt={person.name}
+            />
+            <p>
+              <b>{person.name}:</b>
+              {' ' + person.profession + ' '}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        )}
+      </ul>
+    </article>
   );
 }
 

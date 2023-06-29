@@ -1,11 +1,9 @@
-//Challenge 2 of 3
+//Challenge 1 of 4
 
-export function getImageUrl(person, size) {
+export function getImageUrl(person) {
     return (
       'https://i.imgur.com/' +
       person.imageId +
-      size +
-      '.jpg'
+      's.jpg'
     );
   }
-  
