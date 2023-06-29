@@ -1,4 +1,4 @@
-//Challenge 2 of 4 
+//Challenge 3 of 4 
 
 export const recipes = [{
     id: 'greek-salad',
@@ -13,4 +13,3 @@ export const recipes = [{
     name: 'Hummus',
     ingredients: ['chickpeas', 'olive oil', 'garlic cloves', 'lemon', 'tahini']
   }];
-  
