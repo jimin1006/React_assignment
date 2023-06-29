@@ -1,6 +1,22 @@
-//Chanllenge 2 of 4
-//return문을 한줄로
+//Chanllenge 3 of 4
+//소문자면 html 요소로, 대문자로 시작하면 컴포넌트로 인식
 
-export default function Profile() {
-  return <img src="https://i.imgur.com/jA8hHMpm.jpg" alt="Katsuko Saruhashi" />;
+function Profile() {
+  return (
+    <img
+      src="https://i.imgur.com/QIrZWGIs.jpg"
+      alt="Alan L. Hart"
+    />
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
 }
