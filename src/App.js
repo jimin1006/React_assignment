@@ -1,32 +1,31 @@
-//Challenge 3 of 3 
+//Challenge 1 of 3 
 
-function Card({ children }) {
+function Item({ name, isPacked }) {
   return (
-    <div className="card">
-      <div className="card-content">
-        {children}
-      </div>
-    </div>
+    <li className="item">
+      {name} {isPacked ? '✔' : '❌'}
+    </li>
   );
 }
 
-export default function Profile() {
+export default function PackingList() {
   return (
-    <div>
-      <Card>
-        <h1>Photo</h1>
-        <img
-          className="avatar"
-          src="https://i.imgur.com/OKS67lhm.jpg"
-          alt="Aklilu Lemma"
-          width={100}
-          height={100}
+    <section>
+      <h1>Sally Ride's Packing List</h1>
+      <ul>
+        <Item 
+          isPacked={true} 
+          name="Space suit" 
         />
-      </Card>
-      <Card>
-        <h1>About</h1>
-        <p>Aklilu Lemma was a distinguished Ethiopian scientist who discovered a natural treatment to schistosomiasis.</p>
-      </Card>
-    </div>
+        <Item 
+          isPacked={true} 
+          name="Helmet with a golden leaf" 
+        />
+        <Item 
+          isPacked={false} 
+          name="Photo of Tam" 
+        />
+      </ul>
+    </section>
   );
 }
