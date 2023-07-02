@@ -1,59 +1,39 @@
-//Challenge 1 of 4: Complete the gallery
-import { useState } from 'react';
-import { sculptureList } from './data.js';
+//Challenge 2 of 4: Fix stuck form inputs
+import {useState} from 'react';
 
-export default function Gallery() {
-  const [index, setIndex] = useState(0);
-  const [showMore, setShowMore] = useState(false);
-  //이벤트 핸들러 handlePrevClick() 추가
-  function handlePrevClick() {
-    if (index >0) {
-      setIndex(index - 1);
-    }
+export default function Form() { 
+  //state 변수 선언
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setlastName] = useState('');
+//이벤트 핸들러 
+  function handleFirstNameChange(e) {
+     setFirstName(e.target.value);
+ 
   }
-  //마지막 페이지 전까지만 index 값 증가 
-  function handleNextClick() {
-    if (index < sculptureList.length - 1 ){
-        setIndex(index + 1);
-    }
-    
-}
-
-  function handleMoreClick() {
-    setShowMore(!showMore);
+//이벤트 핸들러
+  function handleLastNameChange(e) {
+    setlastName(e.target.value);
   }
 
-  let sculpture = sculptureList[index];
+  function handleReset() {
+    setFirstName('');
+    setlastName('');
+  }
+
   return (
-    <>
-      <button 
-        onClick={handlePrevClick}
-        disabled={index==0}
-        >
-        Previous
-      </button>
-      
-      <button 
-        onClick={handleNextClick}
-        disabled={index == sculptureList.length - 1}
-        >
-        Next
-      </button>
-      <h2>
-        <i>{sculpture.name} </i> 
-        by {sculpture.artist}
-      </h2>
-      <h3>  
-        ({index + 1} of {sculptureList.length})
-      </h3>
-      <button onClick={handleMoreClick}>
-        {showMore ? 'Hide' : 'Show'} details
-      </button>
-      {showMore && <p>{sculpture.description}</p>}
-      <img 
-        src={sculpture.url} 
-        alt={sculpture.alt}
+    <form onSubmit={e => e.preventDefault()}>
+      <input
+        placeholder="First name"
+        value={firstName}
+        onChange={handleFirstNameChange}
       />
-    </>
+      <input
+        placeholder="Last name"
+        value={lastName}
+        onChange={handleLastNameChange}
+      />
+      <h1>Hi, {firstName} {lastName}</h1>
+      <button onClick={handleReset}>Reset</button>
+    </form>
   );
 }
