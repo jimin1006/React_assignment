@@ -1,33 +1,19 @@
-//Challenge 4 of 4 
-
-const poem = {
-  lines: [
-    'I write, erase, rewrite',
-    'Erase again, and then',
-    'A poppy blooms.'
-  ]
-};
-
-export default function Poem() {
-  let output = [];
-
-  //출력할 배열
-  poem.lines.forEach((line, i) => {
-    output.push(
-      <hr key={i + '-separator'} />
-    );
-    output.push(
-      <p key={i + '-text'}>
-        {line}
-      </p>
-    );
-  });
-  //<hr />을 삭제합니다.
-  output.shift();
+//Resoponding to Events
+//1번
+//함수 호출 X, 전달해야: {handleClick}
+export default function LightSwitch() {
+  function handleClick() {
+    let bodyStyle = document.body.style;
+    if (bodyStyle.backgroundColor === 'black') {
+      bodyStyle.backgroundColor = 'white';
+    } else {
+      bodyStyle.backgroundColor = 'black';
+    }
+  }
 
   return (
-    <article>
-      {output}
-    </article>
+    <button onClick={handleClick}>
+      Toggle the lights
+    </button>
   );
 }
