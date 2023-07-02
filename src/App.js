@@ -1,39 +1,31 @@
-//Challenge 2 of 4: Fix stuck form inputs
-import {useState} from 'react';
+//Challenge 3 of 4: Fix a crash
+//스스로 해결 못함
+//훅은 컴포넌트 함수의 최상위 레벨에서만 호출이 가능하다
+import { useState } from 'react';
 
-export default function Form() { 
-  //state 변수 선언
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setlastName] = useState('');
-//이벤트 핸들러 
-  function handleFirstNameChange(e) {
-     setFirstName(e.target.value);
- 
+export default function FeedbackForm() {
+  //useState 훅: isSent는 괜츈
+  const [isSent, setIsSent] = useState(false);
+  const [message, setMessage] = useState('');
+  if (isSent) {
+    return <h1>Thank you!</h1>;
+  } else {
+    // eslint-disable-next-line
+    
+    return (
+      <form onSubmit={e => {
+        e.preventDefault();
+        alert(`Sending: "${message}"`);
+        setIsSent(true);
+      }}>
+        <textarea
+          placeholder="Message"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+        />
+        <br />
+        <button type="submit">Send</button>
+      </form>
+    );
   }
-//이벤트 핸들러
-  function handleLastNameChange(e) {
-    setlastName(e.target.value);
-  }
-
-  function handleReset() {
-    setFirstName('');
-    setlastName('');
-  }
-
-  return (
-    <form onSubmit={e => e.preventDefault()}>
-      <input
-        placeholder="First name"
-        value={firstName}
-        onChange={handleFirstNameChange}
-      />
-      <input
-        placeholder="Last name"
-        value={lastName}
-        onChange={handleLastNameChange}
-      />
-      <h1>Hi, {firstName} {lastName}</h1>
-      <button onClick={handleReset}>Reset</button>
-    </form>
-  );
 }
