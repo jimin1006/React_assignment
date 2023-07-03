@@ -1,59 +1,58 @@
-//Challenge 1 of 3: Fix incorrect state updates
-//player.score: 새 객체를 만들었으니 이전 객체의 score임을 명시해줘야
+//Challenge 2 of 3: Find and fix the mutation
+//handleMove 내부의 변이
 import { useState } from 'react';
+import Background from './Background.js';
+import Box from './Box.js';
 
-export default function Scoreboard() {
-  const [player, setPlayer] = useState({
-    firstName: 'Ranjani',
-    lastName: 'Shettar',
-    score: 10,
+const initialPosition = {
+  x: 0,
+  y: 0
+};
+
+export default function Canvas() {
+  const [shape, setShape] = useState({
+    color: 'orange',
+    position: initialPosition //초기값
   });
-
-  function handlePlusClick() {
-    setPlayer({
-      ...player,
-      //player.score
-      score: player.score + 1
-    }); 
+  //버그 발생하는 부분
+  //세터함수로 -> 새 객체 생성 & spread문법
+  function handleMove(dx, dy) {
+    setShape({
+      ...shape,
+      position: {
+        x: shape.position.x + dx,
+        y: shape.position.y + dy
+      }
+    })
   }
 
-  function handleFirstNameChange(e) {
-    setPlayer({
-      ...player,
-      firstName: e.target.value,
-    });
-  }
-
-  function handleLastNameChange(e) {
-    setPlayer({
-      ...player,
-      lastName: e.target.value
+  function handleColorChange(e) {
+    setShape({
+      ...shape,
+      color: e.target.value
     });
   }
 
   return (
     <>
-      <label>
-        Score: <b>{player.score}</b>
-        {' '}
-        <button onClick={handlePlusClick}>
-          +1
-        </button>
-      </label>
-      <label>
-        First name:
-        <input
-          value={player.firstName}
-          onChange={handleFirstNameChange}
-        />
-      </label>
-      <label>
-        Last name:
-        <input
-          value={player.lastName}
-          onChange={handleLastNameChange}
-        />
-      </label>
+      <select
+        value={shape.color}
+        onChange={handleColorChange}
+      >
+        <option value="orange">orange</option>
+        <option value="lightpink">lightpink</option>
+        <option value="aliceblue">aliceblue</option>
+      </select>
+      <Background
+        position={initialPosition}
+      />
+      <Box
+        color={shape.color}
+        position={shape.position}
+        onMove={handleMove}
+      >
+        Drag me!
+      </Box>
     </>
   );
 }
