@@ -1,6 +1,7 @@
-//Challenge 2 of 3: Find and fix the mutation
-//handleMove 내부의 변이
+//Challenge 3 of 3: Update an object with Immer
+//세터함수 -> updateShape, updateShape 내부에 draft를 인자로 받아 변경
 import { useState } from 'react';
+import { useImmer } from 'use-immer';
 import Background from './Background.js';
 import Box from './Box.js';
 
@@ -8,28 +9,26 @@ const initialPosition = {
   x: 0,
   y: 0
 };
-
+//setShape -> updateShape
 export default function Canvas() {
-  const [shape, setShape] = useState({
+  const [shape, updateShape] = useImmer({
     color: 'orange',
-    position: initialPosition //초기값
+    position: initialPosition 
   });
-  //버그 발생하는 부분
-  //세터함수로 -> 새 객체 생성 & spread문법
+  
   function handleMove(dx, dy) {
-    setShape({
-      ...shape,
-      position: {
-        x: shape.position.x + dx,
-        y: shape.position.y + dy
-      }
-    })
+    updateShape(draft =>{
+      //이렇게 작성하면 안 됨.. 왜 안 되지?
+      // draft.position.x = shape.position.x + dx,
+      // draft.position.y = shape.position.y + dy
+      draft.position.x += dx;
+      draft.position.y += dy;
+    });
   }
 
   function handleColorChange(e) {
-    setShape({
-      ...shape,
-      color: e.target.value
+    updateShape(draft => {
+      draft.color = e.target.value;
     });
   }
 
